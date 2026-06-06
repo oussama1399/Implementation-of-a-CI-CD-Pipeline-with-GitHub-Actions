@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
 
   # ======================
@@ -21,8 +24,8 @@ jobs:
         run: |
           echo "Checking files..."
           test -f index.html
-          test -f style.css
-          test -f app.js
+          test -f styles.css
+          test -f script.js
           echo "Build stage completed successfully!"
 
   # ======================
@@ -41,7 +44,7 @@ jobs:
           echo "Running simple tests..."
 
           grep -q "<html>" index.html
-          grep -q "function" app.js
+          grep -q "document" script.js
 
           echo "All tests passed!"
 
@@ -60,8 +63,8 @@ jobs:
         run: |
           mkdir build
           cp index.html build/
-          cp style.css build/
-          cp app.js build/
+          cp styles.css build/
+          cp script.js build/
           echo "Package created"
 
       - name: Upload artifact
