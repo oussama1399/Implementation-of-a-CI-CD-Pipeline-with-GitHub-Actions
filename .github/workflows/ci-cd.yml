@@ -1,0 +1,98 @@
+name: Simple CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  # ======================
+  # 1. BUILD STAGE
+  # ======================
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate project structure
+        run: |
+          echo "Checking files..."
+          test -f index.html
+          test -f style.css
+          test -f app.js
+          echo "Build stage completed successfully!"
+
+  # ======================
+  # 2. TEST STAGE
+  # ======================
+  test:
+    runs-on: ubuntu-latest
+    needs: build  # runs after build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Basic tests
+        run: |
+          echo "Running simple tests..."
+
+          grep -q "<html>" index.html
+          grep -q "function" app.js
+
+          echo "All tests passed!"
+
+  # ======================
+  # 3. PACKAGE STAGE
+  # ======================
+  package:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create deployment package
+        run: |
+          mkdir build
+          cp index.html build/
+          cp style.css build/
+          cp app.js build/
+          echo "Package created"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-app
+          path: build/
+
+  # ======================
+  # 4. DEPLOY STAGE (GitHub Pages)
+  # ======================
+  deploy:
+    runs-on: ubuntu-latest
+    needs: package
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
