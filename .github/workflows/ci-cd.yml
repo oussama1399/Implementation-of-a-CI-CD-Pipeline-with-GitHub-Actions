@@ -43,7 +43,7 @@ jobs:
         run: |
           echo "Running simple tests..."
 
-          grep -E -q "<html(\\s|>)" index.html
+          grep -E -q "<html([[:space:]]|>|/)" index.html
           grep -q "document" script.js
 
           echo "All tests passed!"
