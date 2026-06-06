@@ -1,0 +1,118 @@
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --accent:#2b6ef6;
+  --muted:#6b7280;
+  --danger:#e53e3e;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%);
+  color:#0f172a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+}
+
+.container{
+  width:100%;
+  max-width:720px;
+}
+
+header h1{
+  margin:0 0 6px 0;
+  font-size:1.6rem;
+  letter-spacing: -0.4px;
+}
+.subtitle{
+  margin:0 0 18px 0;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+.todo-panel{
+  background:var(--card);
+  border-radius:12px;
+  padding:18px;
+  box-shadow:0 6px 18px rgba(30,41,59,0.06);
+}
+
+.todo-form{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+}
+.todo-form input{
+  flex:1;
+  padding:10px 12px;
+  border:1px solid #e6e9ef;
+  border-radius:8px;
+  font-size:1rem;
+}
+.todo-form button{
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.todo-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-height:50vh;
+  overflow:auto;
+}
+
+.todo-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #f0f2f7;
+}
+.todo-item.done{
+  opacity:0.7;
+  text-decoration:line-through;
+}
+.todo-item .text{flex:1}
+.todo-item button{
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  color:var(--muted);
+  padding:6px;
+}
+.controls{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+.controls button{
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid #e6e9ef;
+  background:white;
+  cursor:pointer;
+}
+.controls .danger{
+  border-color:rgba(229,62,62,0.12);
+  color:var(--danger);
+}
+@media (max-width:520px){
+  body{padding:16px}
+  .container{max-width:100%}
+}

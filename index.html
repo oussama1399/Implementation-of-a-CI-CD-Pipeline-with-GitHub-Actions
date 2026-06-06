@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TP — TODO App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>TP — Liste de tâches</h1>
+      <p class="subtitle">Ajoute, complète et supprime des tâches (sauvegarde locale)</p>
+    </header>
+
+    <section class="todo-panel">
+      <form id="todo-form" class="todo-form">
+        <input id="todo-input" type="text" placeholder="Nouvelle tâche..." required />
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+
+      <div class="controls">
+        <button id="clear-done">Effacer terminées</button>
+        <button id="clear-all" class="danger">Tout effacer</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
